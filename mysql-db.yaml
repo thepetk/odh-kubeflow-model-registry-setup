@@ -1,3 +1,9 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-database
+---
 apiVersion: v1
 items:
 - apiVersion: v1
