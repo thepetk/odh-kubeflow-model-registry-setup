@@ -17,6 +17,7 @@ items:
     annotations:
       template.openshift.io/expose-uri: mysql://{.spec.clusterIP}:{.spec.ports[?(.name==\mysql\)].port}
     name: model-registry-db
+    namespace: test-database
   spec:
     ports:
     - name: mysql
@@ -38,6 +39,7 @@ items:
       app.kubernetes.io/part-of: model-registry-db
       app.kubernetes.io/managed-by: kustomize
     name: model-registry-db
+    namespace: test-database
   spec:
     accessModes:
     - ReadWriteOnce
@@ -55,6 +57,7 @@ items:
     annotations:
       template.alpha.openshift.io/wait-for-ready: "true"
     name: model-registry-db
+    namespace: test-database
   spec:
     replicas: 1
     revisionHistoryLimit: 0
@@ -144,6 +147,7 @@ items:
       template.openshift.io/expose-password: '{.data[''database-password'']}'
       template.openshift.io/expose-username: '{.data[''database-user'']}'
     name: model-registry-db
+    namespace: test-database
   stringData:
     database-name: "model_registry"
     database-password: "TheBlurstOfTimes" # notsecret
