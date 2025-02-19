@@ -1,6 +1,6 @@
-oc new-project test-database
 
 oc apply -f mysql-db.yaml
+oc project test-database 
 oc wait --for=condition=available deployment/model-registry-db --timeout=5m 
 
 oc project odh-model-registries
