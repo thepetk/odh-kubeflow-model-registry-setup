@@ -1,0 +1,75 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: odh-kubeflow-model-registry-setup
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: odh-kubeflow-model-registry-setup
+  namespace: odh-kubeflow-model-registry-setup
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: odh-kubeflow-model-registry-setup
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: odh-kubeflow-model-registry-setup
+    namespace: odh-kubeflow-model-registry-setup
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: odh-kubeflow-model-registry-setup
+  namespace: odh-kubeflow-model-registry-setup
+spec:
+  template:
+    spec:
+      containers:
+        - name: installer
+          command:
+            - /bin/bash
+            - -c
+            - |
+              #!/usr/bin/env bash
+              set -o nounset
+              set -o pipefail
+
+
+              cd /tmp || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/authorino-subcription.yaml || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/default-dsc-patched-for-kfmr.yaml || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/default-dsci.yaml || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/mysql-db.yaml || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/odh-admins.yaml || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/opendatahub-subscription.yaml || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/registry.yaml || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/serverless-subscription.yaml || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/servicemesh-subscription.yaml || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/subscriptions.sh || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/dsc-setup.sh || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/model-registry-setup.sh || exit
+              
+              wget https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64
+              mv jq-linux-amd64 jq
+              chmod +x jq
+              export PATH=/tmp:$PATH
+
+              chmod +x subscriptions.sh
+              chmod +x dsc-setup.sh
+              chmod +x model-registry-setup.sh
+          
+              ./subscriptions.sh || exit
+              ./dsc-setup.sh || exit
+              ./model-registry-setup.sh || exit
+
+          image: registry.redhat.io/openshift4/ose-cli-rhel9:v4.16
+
+      restartPolicy: OnFailure
+      serviceAccountName: odh-kubeflow-model-registry-setup
