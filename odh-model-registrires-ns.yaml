@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/sa.scc.supplemental-groups: 1000860000/10000
+    openshift.io/sa.scc.uid-range: 1000860000/10000
+  name: odh-model-registries
