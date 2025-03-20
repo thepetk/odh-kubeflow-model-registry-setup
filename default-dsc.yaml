@@ -17,11 +17,6 @@ spec:
     datasciencepipelines:
       managementState: Managed
     kserve:
-      devFlags:
-        manifests:
-          - contextDir: config
-            sourcePath: base
-            uri: 'https://github.com/Al-Pragliola/odh-model-controller/tarball/feat/custom-inference-image'
       managementState: Managed
       serving:
         ingressGateway:
