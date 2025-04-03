@@ -1,0 +1,8 @@
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  generateName: openshift-kmm-
+  namespace: openshift-kmm
+spec:
+  upgradeStrategy: Default
