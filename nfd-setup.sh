@@ -1,5 +1,5 @@
 oc apply -f nfd.yaml
-oc wait --for=condition=available nodefeaturediscovery/nfd-instance --timeout=300s
+oc wait --for=condition=available nodefeaturediscovery/nfd-instance -n openshift-nfd --timeout=300s
 
 sleep 15
 
