@@ -1,0 +1,43 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  annotations:
+    openshift.io/display-name: granite-3.1-8b-lab-v1-1.4.0 - v1
+    serving.knative.openshift.io/enablePassthrough: "true"
+    serving.kserve.io/deploymentMode: Serverless
+    sidecar.istio.io/inject: "true"
+    sidecar.istio.io/rewriteAppHTTPProbers: "true"
+  labels:
+    modelregistry.opendatahub.io/inference-service-id: "4"
+    modelregistry.opendatahub.io/model-version-id: "2"
+    modelregistry.opendatahub.io/name: modelregistry-public
+    modelregistry.opendatahub.io/registered-model-id: "1"
+    opendatahub.io/dashboard: "true"
+  name: granite-31-8b-lab-v1-140-v1
+spec:
+  predictor:
+    maxReplicas: 1
+    minReplicas: 1
+    model:
+      args:
+        - --max-model-len=16384
+        - --model
+        - /mnt/models
+      modelFormat:
+        name: vLLM
+      name: ""
+      resources:
+        limits:
+          cpu: "4"
+          memory: 16Gi
+          nvidia.com/gpu: "1"
+        requests:
+          cpu: "1"
+          memory: 256Mi
+          nvidia.com/gpu: "1"
+      runtime: granite-31-8b-lab-v1-140-v1
+      storageUri: oci://registry.redhat.io/rhelai1/modelcar-granite-3-1-8b-lab-v1:1.4.0
+    tolerations:
+      - effect: NoSchedule
+        key: nvidia.com/gpu
+        operator: Exists
