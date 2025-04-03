@@ -32,7 +32,7 @@ done
 oc wait --for=jsonpath='{.status.phase}'=Succeeded "$KMM" -n openshift-kmm --timeout=300s
 
 oc apply -f ./nvidia-gpu-ns.yaml
-oc create -f ./touch nvidia-gpu-operatorgroup.yaml
+oc create -f ./nvidia-gpu-operatorgroup.yaml
 oc apply -f ./nvidia-gpu-subscription.yaml
 while true; do
 	oc get csv -o name -n nvidia-gpu-operator | grep gpu > gpu.txt
