@@ -1,5 +1,5 @@
 #!/bin/bash
-oc apply -f ./nodefeature-subcription.yaml
+oc apply -f ./nodefeature-subscription.yaml
 while true; do
 	oc get csv -o name -n openshift-nfd | grep nfd > nfd.txt
 	if [ -s nfd.txt ]; then
