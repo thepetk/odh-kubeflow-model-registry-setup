@@ -29,7 +29,7 @@ while true; do
 		sleep 5
 	fi
 done
-oc wait --for=jsonpath='{.status.phase}'=Succeeded "KMM" -n openshift-kmm --timeout=300s
+oc wait --for=jsonpath='{.status.phase}'=Succeeded "$KMM" -n openshift-kmm --timeout=300s
 
 oc apply -f ./nvidia-gpu-ns.yaml
 oc create -f ./touch nvidia-gpu-operatorgroup.yaml
