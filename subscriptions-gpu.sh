@@ -54,7 +54,7 @@ while true; do
     echo "ip.txt is ${IP})"
     break
   else
-    else "ip.txt still empty"
+    echo "ip.txt still empty"
     sleep 5
   fi
 done
