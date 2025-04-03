@@ -1,4 +1,6 @@
 #!/bin/bash
+oc apply -f ./nodefeature-ns.yaml
+oc create -f ./nodefeature-operatorgroup.yaml
 oc apply -f ./nodefeature-subscription.yaml
 while true; do
 	oc get csv -o name -n openshift-nfd | grep nfd > nfd.txt
@@ -13,6 +15,8 @@ while true; do
 done
 oc wait --for=jsonpath='{.status.phase}'=Succeeded "$NFD" -n openshift-nfd --timeout=600s
 
+oc apply -f ./kmm-ns.yaml
+oc create -f ./kmm-operatorgroup.yaml
 oc apply -f ./kmm-subscription.yaml
 while true; do
 	oc get csv -o name -n openshift-kmm | grep kernel > kmm.txt
@@ -27,7 +31,8 @@ while true; do
 done
 oc wait --for=jsonpath='{.status.phase}'=Succeeded "KMM" -n openshift-kmm --timeout=300s
 
-
+oc apply -f ./nvidia-gpu-ns.yaml
+oc create -f ./touch nvidia-gpu-operatorgroup.yaml
 oc apply -f ./nvidia-gpu-subscription.yaml
 while true; do
 	oc get csv -o name -n nvidia-gpu-operator | grep gpu > gpu.txt
