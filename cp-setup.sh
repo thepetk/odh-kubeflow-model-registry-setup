@@ -24,6 +24,6 @@ spec:
     effect: NoSchedule
 EOF
 
-oc wait --for=jsonpath='{.status.phase}'=Succeeded pod/gpu-pod --timeout=120s
+oc wait --for=jsonpath='{.status.phase}'=Succeeded pod/gpu-pod --timeout=600s
 
 oc logs gpu-pod

@@ -68,7 +68,6 @@ spec:
               chmod +x nfd-setup.sh
           
               ./subscriptions-gpu.sh || exit
-              ./nfd-setup.sh || exit
               ./cp-setup.sh || exit
 
           image: registry.redhat.io/openshift4/ose-cli-rhel9:v4.16
