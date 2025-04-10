@@ -11,4 +11,4 @@ spec:
   name: opendatahub-operator
   source: community-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: opendatahub-operator.v2.26.0
+  startingCSV: opendatahub-operator.v2.27.0
