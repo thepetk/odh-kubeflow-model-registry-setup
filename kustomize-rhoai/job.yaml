@@ -80,10 +80,11 @@ spec:
               ./subscriptions-rhoai.sh || exit
               ./dsc-setup.sh || exit
               ./model-registry-setup-rhoai.sh || exit
-              
-              oc project opendatahub
-              oc patch odhdashboardconfig.opendatahub.io odh-dashboard-config -n opendatahub --type merge -p '{"spec": {"dashboardConfig": {"disableModelCatalog": false}}}'
-              oc apply -k ./rhoai-model-catalog
+
+              # need to get model registry working first
+              #oc project opendatahub
+              #oc patch odhdashboardconfig.opendatahub.io odh-dashboard-config -n opendatahub --type merge -p '{"spec": {"dashboardConfig": {"disableModelCatalog": false}}}'
+              #oc apply -k ./rhoai-model-catalog
 
           image: registry.redhat.io/openshift4/ose-cli-rhel9:v4.16
 
