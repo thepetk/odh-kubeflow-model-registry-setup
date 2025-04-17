@@ -1,5 +1,5 @@
 #!/bin/bash
-oc apply -f ./authorino-subscription.yaml
+oc apply -f ./authorino-rh-subscription.yaml
 while true; do
 	oc get csv -o name -n openshift-operators | grep authorino > autho.txt
 	if [ -s autho.txt ]; then
@@ -43,19 +43,19 @@ done
 oc wait --for=jsonpath='{.status.phase}'=Succeeded "$SERVERLESS" -n openshift-serverless --timeout=300s
 
 
-oc apply -f ./opendatahub-subscription.yaml
+oc apply -f ./rhoai-subscription.yaml
 while true; do
-	oc get csv -o name -n openshift-operators | grep opendatahub > hub.txt
+	oc get csv -o name -n redhat-ods-operator | grep rhods > hub.txt
 	if [ -s hub.txt ]; then
-		export OPENDATAHUB=$(cat hub.txt)
-		echo "hub csv is ${OPENDATAHUB}"
+		export RHODS=$(cat hub.txt)
+		echo "hub csv is ${RHODS}"
 		break
 	else
 		echo "hub.txt still empty"
 		sleep 5
 	fi
 done
-oc wait --for=jsonpath='{.status.phase}'=Succeeded "$OPENDATAHUB" -n openshift-operators --timeout=300s
+oc wait --for=jsonpath='{.status.phase}'=Succeeded "RHODS" -n redhat-ods-operator --timeout=300s
 
 
 
