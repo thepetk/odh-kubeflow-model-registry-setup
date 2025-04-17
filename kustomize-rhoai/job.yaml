@@ -47,7 +47,7 @@ spec:
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/default-dsc-rhoai.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/default-dsci-rhoai.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/mysql-db.yaml || exit
-              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/odh-admins.yaml || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/rhods-admins.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/rhoai-subscription.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/odh-model-registrires-ns.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/registry-rhoai.yaml || exit
