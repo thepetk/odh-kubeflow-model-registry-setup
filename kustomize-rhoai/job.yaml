@@ -44,8 +44,8 @@ spec:
 
               cd /tmp || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/authorino-rh-subscription.yaml || exit
-              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/default-dsc.yaml || exit
-              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/default-dsci.yaml || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/default-dsc-rhoai.yaml || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/default-dsci-rhoai.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/mysql-db.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/odh-admins.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/rhoai-subscription.yaml || exit
@@ -54,7 +54,7 @@ spec:
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/serverless-subscription.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/servicemesh-subscription.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/subscriptions-rhoai.sh || exit
-              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/dsc-setup.sh || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/dsc-setup-rhoai.sh || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/model-registry-setup-rhoai.sh || exit
               
               wget https://raw.githubusercontent.com/opendatahub-io/odh-dashboard/refs/heads/main/manifests/rhoai/shared/apps/model-catalog/kustomization.yaml || exit
@@ -74,17 +74,16 @@ spec:
               export PATH=/tmp:$PATH
 
               chmod +x subscriptions-rhoai.sh
-              chmod +x dsc-setup.sh
+              chmod +x dsc-setup-rhoai.sh
               chmod +x model-registry-setup-rhoai.sh
           
               ./subscriptions-rhoai.sh || exit
-              ./dsc-setup.sh || exit
+              ./dsc-setup-rhoai.sh || exit
               ./model-registry-setup-rhoai.sh || exit
 
-              # need to get model registry working first
-              #oc project opendatahub
-              #oc patch odhdashboardconfig.opendatahub.io odh-dashboard-config -n opendatahub --type merge -p '{"spec": {"dashboardConfig": {"disableModelCatalog": false}}}'
-              #oc apply -k ./rhoai-model-catalog
+              oc project redhat-ods-applications
+              oc patch odhdashboardconfig.opendatahub.io odh-dashboard-config -n redhat-ods-applications --type merge -p '{"spec": {"dashboardConfig": {"disableModelCatalog": false}}}'
+              oc apply -k ./rhoai-model-catalog
 
           image: registry.redhat.io/openshift4/ose-cli-rhel9:v4.16
 
