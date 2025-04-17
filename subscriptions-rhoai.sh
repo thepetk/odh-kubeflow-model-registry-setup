@@ -55,7 +55,7 @@ while true; do
 		sleep 5
 	fi
 done
-oc wait --for=jsonpath='{.status.phase}'=Succeeded "RHODS" -n redhat-ods-operator --timeout=300s
+oc wait --for=jsonpath='{.status.phase}'=Succeeded "$RHODS" -n redhat-ods-operator --timeout=300s
 
 
 
