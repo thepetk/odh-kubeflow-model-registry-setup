@@ -50,7 +50,7 @@ spec:
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/odh-admins.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/rhoai-subscription.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/odh-model-registrires-ns.yaml || exit
-              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/registry.yaml || exit
+              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/registry-rhoai.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/serverless-subscription.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/servicemesh-subscription.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/subscriptions-rhoai.sh || exit
