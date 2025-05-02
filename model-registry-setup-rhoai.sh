@@ -13,8 +13,5 @@ oc apply -f rhods-admins.yaml
 oc set env  deployment/odh-model-controller -n redhat-ods-applications MR_SKIP_TLS_VERIFY=true
 oc wait --for=jsonpath='{.status.observedGeneration}'=2 deployment/odh-model-controller -n redhat-ods-applications --timeout=300s
 
-TOKEN=$(echo /var/run/secrets/kubernetes.io/serviceaccount/token)
 URL=`echo "https://$(oc get routes -n istio-system -l app.kubernetes.io/name=modelregistry-public -o json | jq '.items[].status.ingress[].host | select(contains("-rest"))')" | tr -d '"'`
 echo "model registry URL is ${URL}"
-curl -k -H "Authorization: Bearer $TOKEN" $URL/api/model_registry/v1alpha3/registered_models
-echo

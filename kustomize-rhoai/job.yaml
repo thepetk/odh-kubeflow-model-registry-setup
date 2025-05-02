@@ -45,7 +45,6 @@ spec:
               cd /tmp || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/authorino-rh-subscription.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/default-dsc-rhoai.yaml || exit
-              wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/default-dsci-rhoai.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/mysql-db.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/rhods-admins.yaml || exit
               wget https://raw.githubusercontent.com/redhat-ai-dev/odh-kubeflow-model-registry-setup/refs/heads/main/rhoai-subscription.yaml || exit
