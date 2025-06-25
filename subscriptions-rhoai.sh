@@ -29,19 +29,6 @@ oc wait --for=jsonpath='{.status.phase}'=Succeeded "$SERVICEMESH" -n openshift-o
 
 
 oc apply -f ./serverless-subscription.yaml
-while true; do
-	oc get csv -o name -n openshift-serverless | grep serverless > serverless.txt
-	if [ -s serverless.txt ]; then
-		export SERVERLESS=$(cat serverless.txt)
-		echo "serverless csv is ${SERVERLESS}"
-		break
-	else
-		echo "serverless.txt still empty"
-		sleep 5
-	fi
-done
-oc wait --for=jsonpath='{.status.phase}'=Succeeded "$SERVERLESS" -n openshift-serverless --timeout=300s
-
 
 oc apply -f ./rhoai-subscription.yaml
 while true; do
